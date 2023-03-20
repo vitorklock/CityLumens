@@ -1,9 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     background-color: #262626;
     color: #fff;
 }
@@ -29,19 +32,30 @@ body {
 }
 
 .out {
+    width: 100%;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.out span {
+.out .data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.out .data span {
     width: 170px;
     display: inline-block;
-}
-
-.out div {
-    margin-top: 10px;
 }
 
 button {
     width: 100%;
     flex-grow: 1;
+}
+
+#visualization {
+    height: 30px;
+    width: 100%;
 }

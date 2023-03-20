@@ -15,20 +15,20 @@
 
 <body>
     <div class="wrapper">
-        <button onclick="showCoordinates()">
+        <button onclick="register()">
             Poste
         </button>
-        <button>
-            Poste quebrado
-        </button>
-        <button>
-            Sem poste
-        </button>
         <div class="out">
-            
+            <video id="video"></video>
+            <!-- <img id="capture" alt="Image will appear here"> -->
+            <div class="data"></div>
+            <canvas id="canvas"></canvas>
+            <div id="visualization"></div>
         </div>
     </div>
-    <script src="./script.js"></script>
+
+    <script src="./src/js/main.js"></script>
+    <script src="./src/js/brightness.js"></script>
 </body>
 
 </html>
