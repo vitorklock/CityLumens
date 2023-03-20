@@ -14,16 +14,23 @@
 </head>
 
 <body>
+    <div id="loading">
+        <span> Certifique-se de permitir acesso a câmera e localização.</span>
+        <button onclick="init()" style="display:none;">Iniciar</button>
+    </div>
     <div class="wrapper">
         <button onclick="register()">
             Poste
         </button>
         <div class="out">
-            <video id="video"></video>
+            <div id="visual" class="streaming">
+                <video id="video"></video>
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="visualization"></div>
+            <div id="brightnessVal" style="margin-top: -20px;"></div>
             <!-- <img id="capture" alt="Image will appear here"> -->
             <div class="data"></div>
-            <canvas id="canvas"></canvas>
-            <div id="visualization"></div>
         </div>
     </div>
 

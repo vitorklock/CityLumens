@@ -4,13 +4,24 @@ const
     canvas = document.getElementById('canvas'),
     // capture = document.getElementById('capture'),
     visualization = document.getElementById('visualization'),
-    fuzzy = 0.1;
+    fuzzy = 0.1, inbetweenDelay = 4000;
 
+// let geolocation; TODO monitor location into this
 let processing = false;
+
+function error(...args) {
+    console.error(...args);
+}
+
+function streaming(bool) {
+    $("#visual")[(bool ? "add" : "remove") + "Class"]("streaming");
+    processing = !bool;
+}
+
 function register() {
     if (!processing) {
-        processing = true;
-        navigator.geolocation.getCurrentPosition(on, on)
+        streaming(false);
+        navigator.geolocation.getCurrentPosition(on, error);
 
         function on(arg1) {
             console.log(arg1);
@@ -31,31 +42,28 @@ function register() {
         let brightness = snapAndMeasure();
         console.log(brightness);
         visualization.style.backgroundColor =
-            `rgb(${brightness},${brightness},${brightness})`
+            `rgb(${brightness},${brightness},${brightness})`;
+        $("#brightnessVal").text(`${brightness} (${(255 * 100) / brightness}%)`);
 
-        setTimeout(() => processing = false, 500);
+        setTimeout(() => streaming(true), inbetweenDelay);
     } else {
         console.error("Already processing!")
     }
 }
 
 $(document).ready(async () => {
+    // Start geolocation
     navigator.geolocation;
 
+    // Start video stream
     let stream = await navigator.mediaDevices
         .getUserMedia({ video: true, audio: false });
-
     video.srcObject = stream;
     video.play();
+
+    $("#loading button").show();
 })
 
-function takePicture() {
-    const context = canvas.getContext("2d");
-
-    canvas.height = video.offsetHeight;
-    canvas.width = video.offsetWidth;
-    context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
-
-    const data = canvas.toDataURL("image/png");
-    capture.setAttribute("src", data);
+function init() {
+    $("#loading").hide();
 }
